@@ -1,26 +1,34 @@
+"use client"
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-green-100 via-white to-green-200">
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center flex-1 text-center py-20 px-4 bg-gradient-to-b from-green-200/80 to-white overflow-hidden">
         {/* Left Leaves */}
-        <Image src="/Leaves.png" width={200} height={200} alt="Leaves Left" className="hidden md:block absolute left-0 top-10 md:top-1/4 w-40 h-40 opacity-70 pointer-events-none select-none" style={{zIndex:0}} />
+  <Image src="/Leaves.png" width={200} height={200} alt="Leaves Left" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute left-0 top-10 md:top-1/4 w-40 h-40 opacity-70 pointer-events-none select-none" style={{zIndex:1}} />
         {/* Right Leaves */}
-        <Image src="/Leaves.png" width={200} height={200} alt="Leaves Right" className="hidden md:block absolute right-0 bottom-10 md:bottom-1/4 w-40 h-40 opacity-70 pointer-events-none select-none transform scale-x-[-1]" style={{zIndex:0}} />
+  <Image src="/Leaves.png" width={200} height={200} alt="Leaves Right" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute right-0 bottom-10 md:bottom-1/4 w-40 h-40 opacity-70 pointer-events-none select-none transform scale-x-[-1]" style={{zIndex:1}} />
           {/* Curve SVG Background */}
           {/* <Image src="/Curves.svg" fill alt="Curve Background" className="absolute left-0 top-0 w-full h-full object-cover pointer-events-none select-none" /> */}
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center">
-          <Image src={"/EcoVisionLogo.png"} width={200} height={200} alt="Hero"/>
+          <Image src={"/EcoVisionLogo.png"} width={200} height={200} alt="Hero" className="levitate2"/>
           <h1 className="text-6xl font-extrabold text-green-800 mb-4 drop-shadow">EcoVision</h1>
           <h2 className="text-2xl sm:text-3xl font-semibold text-green-600 mb-8">Empowering a Greener Tomorrow</h2>
           <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-10">
             Revolutionizing waste management for a cleaner, greener planet. Upload your waste, find the nearest eco-friendly dumping site, and join a community making a real difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg transition">Upload Waste</button>
-            <button className="bg-white border border-green-600 hover:bg-green-50 text-green-700 font-bold py-3 px-10 rounded-full text-lg shadow-lg transition">Find Nearest Location</button>
+            <button
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg transition-transform duration-200 hover:scale-105"
+              onClick={() => router.push("/upload-waste")}
+            >
+              Upload Waste
+            </button>
+            <button className="bg-white border border-green-600 hover:bg-green-50 text-green-700 font-bold py-3 px-10 rounded-full text-lg shadow-lg transition-transform duration-200 hover:scale-105">Find Nearest Location</button>
           </div>
         </div>
       </section>

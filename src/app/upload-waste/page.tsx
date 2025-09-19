@@ -4,7 +4,10 @@ import { useRef, useState } from "react";
 export default function UploadWaste() {
   const [preview, setPreview] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<File | null>(null);
 
   // Detect if mobile
   const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
@@ -13,6 +16,8 @@ export default function UploadWaste() {
     const file = e.target.files?.[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
+      fileRef.current = file;
+      setResult(null);
     }
   };
 
@@ -22,6 +27,28 @@ export default function UploadWaste() {
     const file = e.dataTransfer.files?.[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
+      fileRef.current = file;
+      setResult(null);
+    }
+  };
+
+  const handleCheckWaste = async () => {
+    if (!fileRef.current) return;
+    setLoading(true);
+    setResult(null);
+    const formData = new FormData();
+    formData.append("file", fileRef.current);
+    try {
+      const res = await fetch("/api/check-waste", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      setResult(data.result || data.error || "No result");
+    } catch (e) {
+      setResult("Error checking waste");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,7 +73,19 @@ export default function UploadWaste() {
               Upload Photo
             </button>
             {preview && (
-              <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+              <>
+                <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+                <button
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full text-base shadow transition disabled:opacity-60"
+                  onClick={handleCheckWaste}
+                  disabled={loading}
+                >
+                  {loading ? "Checking..." : "Check Waste Type"}
+                </button>
+                {result && (
+                  <div className="mt-4 p-4 bg-white rounded shadow text-green-700 font-bold text-lg">{result}</div>
+                )}
+              </>
             )}
           </div>
         ) : (
@@ -72,7 +111,19 @@ export default function UploadWaste() {
               Or select a file
             </button>
             {preview && (
-              <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+              <>
+                <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+                <button
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full text-base shadow transition disabled:opacity-60"
+                  onClick={handleCheckWaste}
+                  disabled={loading}
+                >
+                  {loading ? "Checking..." : "Check Waste Type"}
+                </button>
+                {result && (
+                  <div className="mt-4 p-4 bg-white rounded shadow text-green-700 font-bold text-lg">{result}</div>
+                )}
+              </>
             )}
           </div>
         )}
