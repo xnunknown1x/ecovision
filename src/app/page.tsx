@@ -38,7 +38,7 @@ export default function Home() {
         <h3 className="text-2xl font-bold text-green-700 mb-4">Why Choose EcoVision?</h3>
         <ul className="text-lg text-gray-700 max-w-2xl mx-auto space-y-3">
           <li><span className="font-semibold">Reduce, Reuse, Recycle:</span> Every action counts toward a sustainable future.</li>
-          <li><span className="font-semibold">Easy Waste Disposal:</span> Upload, locate, and dispose—it's that simple.</li>
+          <li><span className="font-semibold">Easy Waste Disposal:</span> Upload, locate, and dispose—it&apos;s that simple.</li>
           <li><span className="font-semibold">Community Impact:</span> Join hands with others to keep our environment clean.</li>
           <li><span className="font-semibold">Track Your Contribution:</span> See the difference you make, one upload at a time.</li>
         </ul>

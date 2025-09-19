@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 export default function UploadWaste() {
   const [preview, setPreview] = useState<string | null>(null);
@@ -43,9 +44,10 @@ export default function UploadWaste() {
         method: "POST",
         body: formData,
       });
-      const data = await res.json();
+      type ApiResponse = { result?: string; error?: string };
+      const data: ApiResponse = await res.json();
       setResult(data.result || data.error || "No result");
-    } catch (e) {
+    } catch {
       setResult("Error checking waste");
     } finally {
       setLoading(false);
@@ -84,7 +86,15 @@ export default function UploadWaste() {
             )}
             {preview && (
               <>
-                <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+                <Image
+                  src={preview}
+                  alt="Preview"
+                  width={400}
+                  height={300}
+                  className="mt-4 rounded-lg shadow w-full object-cover max-h-64"
+                  style={{ width: '100%', height: 'auto', maxHeight: '16rem' }}
+                  unoptimized
+                />
                 {!result && (
                   <button
                     className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full text-base shadow transition disabled:opacity-60"
@@ -141,7 +151,15 @@ export default function UploadWaste() {
             )}
             {preview && (
               <>
-                <img src={preview} alt="Preview" className="mt-4 rounded-lg shadow w-full object-cover max-h-64" />
+                <Image
+                  src={preview}
+                  alt="Preview"
+                  width={400}
+                  height={300}
+                  className="mt-4 rounded-lg shadow w-full object-cover max-h-64"
+                  style={{ width: '100%', height: 'auto', maxHeight: '16rem' }}
+                  unoptimized
+                />
                 {!result && (
                   <button
                     className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full text-base shadow transition disabled:opacity-60"

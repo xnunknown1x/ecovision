@@ -38,12 +38,22 @@ export async function POST(request: Request) {
       model: "gemini-2.5-flash",
       contents: contents,
     });
-    let result = (response as any).text;
-    if (!result && (response as any).candidates?.[0]?.content?.parts?.[0]?.text) {
-      result = (response as any).candidates[0].content.parts[0].text;
+    // Try to extract result from response with proper type checks
+    type GeminiCandidate = {
+      content?: { parts?: { text?: string }[] };
+    };
+    type GeminiResponse = {
+      text?: string;
+      candidates?: GeminiCandidate[];
+    };
+    const geminiResponse = response as GeminiResponse;
+    let result = geminiResponse.text;
+    if (!result && geminiResponse.candidates?.[0]?.content?.parts?.[0]?.text) {
+      result = geminiResponse.candidates[0].content.parts[0].text;
     }
     return NextResponse.json({ result });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e) {
+    const error = e instanceof Error ? e : new Error('Unknown error');
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
