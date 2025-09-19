@@ -1,0 +1,47 @@
+[
+  {
+    "category": "Plastic",
+  "description": "Dispose of plastic waste in the designated plastic recycling bin. Clean and dry plastics before recycling. Avoid mixing with organic or hazardous waste.",
+  "environmentalImpact": "Plastic waste can persist in the environment for hundreds of years, polluting land and oceans, harming wildlife, and entering the food chain as microplastics."
+  },
+  {
+    "category": "Organic",
+  "description": "Compost organic waste such as food scraps and yard trimmings. Use a compost bin or deposit in the municipal organic waste collection. Do not mix with plastics or metals.",
+  "environmentalImpact": "Improper disposal of organic waste leads to methane emissions, a potent greenhouse gas, and can cause water and soil pollution."
+  },
+  {
+    "category": "Metal",
+  "description": "Place metal waste in the metal recycling bin. Rinse cans and containers before recycling. Large metal items should be taken to a recycling center.",
+  "environmentalImpact": "Metal waste can leach toxic substances into soil and water. Mining and processing new metals is energy-intensive and polluting."
+  },
+  {
+    "category": "Paper",
+  "description": "Recycle paper waste in the paper recycling bin. Remove any plastic or metal bindings. Shredded paper should be bagged separately if required by your local facility.",
+  "environmentalImpact": "Paper waste contributes to deforestation and landfill volume. Decomposing paper in landfills produces methane, a greenhouse gas."
+  },
+  {
+    "category": "Glass",
+  "description": "Dispose of glass bottles and jars in the glass recycling bin. Rinse before recycling. Broken glass should be wrapped and placed in general waste if recycling is not available.",
+  "environmentalImpact": "Glass waste is non-biodegradable and can persist indefinitely. Broken glass poses physical hazards to humans and animals."
+  },
+  {
+    "category": "E-Waste",
+  "description": "Take electronic waste (batteries, phones, computers) to a certified e-waste recycling center. Do not dispose of in regular bins.",
+  "environmentalImpact": "E-waste contains toxic substances like lead and mercury that can contaminate soil and water, harming ecosystems and human health."
+  },
+  {
+    "category": "Hazardous",
+  "description": "Hazardous waste (chemicals, paints, medicines) must be taken to a hazardous waste collection facility. Never pour down the drain or throw in regular trash.",
+  "environmentalImpact": "Hazardous waste can cause severe environmental damage, poisoning water, soil, and air, and posing serious health risks to humans and wildlife."
+  },
+  {
+    "category": "Textile",
+  "description": "Donate usable clothing and textiles. Otherwise, place in textile recycling bins if available. Avoid sending textiles to landfill.",
+  "environmentalImpact": "Textile waste in landfills releases greenhouse gases and toxic chemicals from dyes and fibers, polluting soil and water."
+  },
+  {
+    "category": "Other",
+  "description": "For items not listed, consult your local waste management authority for proper disposal instructions.",
+  "environmentalImpact": "Improper disposal of unknown waste types can lead to pollution, resource waste, and harm to ecosystems. Always seek proper guidance."
+  }
+]

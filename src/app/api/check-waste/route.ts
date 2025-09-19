@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import wasteCategories from "./waste-categories.json";
 
 export const runtime = "nodejs";
 
@@ -15,8 +16,9 @@ export async function POST(request: Request) {
   const buffer = Buffer.from(arrayBuffer);
   const base64ImageFile = buffer.toString("base64");
 
-  // Default prompt for waste classification
-  let prompt = `Classify the waste item in the given image into exactly one of the following categories:\n  - Plastic\n  - Organic\n  - Metal\n  - Paper\n\nRespond with only the category name, nothing else.`;
+  // Build prompt with all categories from JSON
+  const allCategories = wasteCategories.map((c) => c.category).join("\n  - ");
+  let prompt = `Classify the waste item in the given image into exactly one of the following categories:\n  - ${allCategories}\n\nRespond with only the category name, nothing else.`;
   const promptField = formData.get("prompt");
   if (typeof promptField === "string" && promptField.trim().length > 0) {
     prompt = promptField;

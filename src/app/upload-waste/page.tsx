@@ -1,11 +1,14 @@
 "use client";
 import { useRef, useState } from "react";
+import wasteCategories from "../api/check-waste/waste-categories.json";
 import Image from "next/image";
 
 export default function UploadWaste() {
   const [preview, setPreview] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [instructions, setInstructions] = useState<string | null>(null);
+  const [impact, setImpact] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<File | null>(null);
@@ -37,6 +40,8 @@ export default function UploadWaste() {
     if (!fileRef.current) return;
     setLoading(true);
     setResult(null);
+  setInstructions(null);
+  setImpact(null);
     const formData = new FormData();
     formData.append("file", fileRef.current);
     try {
@@ -46,9 +51,18 @@ export default function UploadWaste() {
       });
       type ApiResponse = { result?: string; error?: string };
       const data: ApiResponse = await res.json();
-      setResult(data.result || data.error || "No result");
+      const answer = data.result || data.error || "No result";
+      setResult(answer);
+      // Find instructions for the detected category
+      const match = wasteCategories.find(
+        (cat) => cat.category.toLowerCase() === answer.trim().toLowerCase()
+      );
+      setInstructions(match ? match.description : null);
+      setImpact(match ? match.environmentalImpact : null);
     } catch {
       setResult("Error checking waste");
+  setInstructions(null);
+  setImpact(null);
     } finally {
       setLoading(false);
     }
@@ -57,6 +71,8 @@ export default function UploadWaste() {
   const handleReset = () => {
     setPreview(null);
     setResult(null);
+  setInstructions(null);
+  setImpact(null);
     fileRef.current = null;
   };
 
@@ -111,7 +127,13 @@ export default function UploadWaste() {
                 )}
                 {result && (
                   <>
-                    <div className="mt-4 p-4 bg-white rounded shadow text-black font-mono font-bold text-2xl tracking-wide">{result}</div>
+                    <div className="mt-4 p-4 bg-white rounded shadow text-black font-mono font-bold text-2xl tracking-wide">Waste Type: {result}</div>
+                    {instructions && (
+                      <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded text-green-900 text-base font-sans">{instructions}</div>
+                    )}
+                    {impact && (
+                      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-base font-sans font-semibold">{impact}</div>
+                    )}
                     <button
                       className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-full text-base shadow transition"
                       onClick={handleReset}
@@ -176,7 +198,13 @@ export default function UploadWaste() {
                 )}
                 {result && (
                   <>
-                    <div className="mt-4 p-4 bg-white rounded shadow text-black font-mono font-bold text-2xl tracking-wide">{result}</div>
+                    <div className="mt-4 p-4 bg-white rounded shadow text-black font-mono font-bold text-2xl tracking-wide"><span style={{fontSize:"1.4rem",color:"red"}}>Waste Type:</span>{result}</div>
+                    {instructions && (
+                      <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded text-green-900 text-base font-sans">{instructions}</div>
+                    )}
+                    {impact && (
+                      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-base font-sans font-semibold">{impact}</div>
+                    )}
                     <button
                       className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-full text-base shadow transition"
                       onClick={handleReset}
