@@ -20,6 +20,11 @@
   "environmentalImpact": "Paper waste contributes to deforestation and landfill volume. Decomposing paper in landfills produces methane, a greenhouse gas."
   },
   {
+    "category": "Cardboard",
+    "description": "Flatten cardboard boxes and place them in the cardboard or paper recycling bin. Remove any plastic, foam, or packing materials before recycling. Keep cardboard dry and clean for effective recycling.",
+    "environmentalImpact": "Cardboard waste contributes to deforestation and landfill volume. When not recycled, it decomposes in landfills, producing methane, a potent greenhouse gas. Recycling cardboard saves trees, water, and energy."
+  },
+  {
     "category": "Glass",
   "description": "Dispose of glass bottles and jars in the glass recycling bin. Rinse before recycling. Broken glass should be wrapped and placed in general waste if recycling is not available.",
   "environmentalImpact": "Glass waste is non-biodegradable and can persist indefinitely. Broken glass poses physical hazards to humans and animals."
