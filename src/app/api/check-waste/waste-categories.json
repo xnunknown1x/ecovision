@@ -48,5 +48,10 @@
     "category": "Other",
   "description": "For items not listed, consult your local waste management authority for proper disposal instructions.",
   "environmentalImpact": "Improper disposal of unknown waste types can lead to pollution, resource waste, and harm to ecosystems. Always seek proper guidance."
+  },
+  {
+    "category":"Non-Waste",
+    "description":"The image doesn't seem to be of any waste",
+    "environmentalImpact":"Please Upload Image of Wastes not other"
   }
 ]

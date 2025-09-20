@@ -10,15 +10,27 @@ export default function UploadWaste() {
   const [instructions, setInstructions] = useState<string | null>(null);
   const [impact, setImpact] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [fileError, setFileError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<File | null>(null);
   
   // Detect if mobile
   const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
 
+  const validImageTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"];
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (!validImageTypes.includes(file.type)) {
+        setFileError("Only image files (jpg, png, webp, gif, bmp,) are allowed.");
+        setPreview(null);
+        fileRef.current = null;
+        setResult(null);
+        setInstructions(null);
+        setImpact(null);
+        return;
+      }
+      setFileError(null);
       setPreview(URL.createObjectURL(file));
       fileRef.current = file;
       setResult(null);
@@ -30,6 +42,16 @@ export default function UploadWaste() {
     setDragActive(false);
     const file = e.dataTransfer.files?.[0];
     if (file) {
+      if (!validImageTypes.includes(file.type)) {
+        setFileError("Only image files (jpg, png, webp, gif, bmp) are allowed.");
+        setPreview(null);
+        fileRef.current = null;
+        setResult(null);
+        setInstructions(null);
+        setImpact(null);
+        return;
+      }
+      setFileError(null);
       setPreview(URL.createObjectURL(file));
       fileRef.current = file;
       setResult(null);
@@ -71,8 +93,9 @@ export default function UploadWaste() {
   const handleReset = () => {
     setPreview(null);
     setResult(null);
-  setInstructions(null);
-  setImpact(null);
+    setInstructions(null);
+    setImpact(null);
+    setFileError(null);
     fileRef.current = null;
   };
 
@@ -82,6 +105,9 @@ export default function UploadWaste() {
       <div className="w-full max-w-md">
         {isMobile ? (
           <div className="flex flex-col items-center gap-4">
+            {fileError && (
+              <div className="mb-2 p-2 bg-red-100 border border-red-300 text-red-700 rounded text-sm font-semibold">{fileError}</div>
+            )}
             {!preview && !loading && (
               <>
                 <input
@@ -153,6 +179,9 @@ export default function UploadWaste() {
             onDrop={handleDrop}
             style={{ minHeight: 220 }}
           >
+            {fileError && (
+              <div className="mb-2 p-2 bg-red-100 border border-red-300 text-red-700 rounded text-sm font-semibold">{fileError}</div>
+            )}
             {!preview && !loading && (
               <>
                 <input
