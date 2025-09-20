@@ -8,9 +8,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center flex-1 text-center py-20 px-4 bg-gradient-to-b from-green-200/80 to-white overflow-hidden">
         {/* Left Leaves */}
-  <Image src="/Leaves.png" width={200} height={200} alt="Leaves Left" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute left-0 top-10 md:top-1/4 w-40 h-40 opacity-70 pointer-events-none select-none" style={{zIndex:1}} />
+          <Image src="/Leaves.png" width={200} height={200} alt="Leaves Left" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute left-0 top-10 md:top-1/4 w-40 h-40 opacity-70 pointer-events-none select-none" style={{zIndex:1}} />
         {/* Right Leaves */}
-  <Image src="/Leaves.png" width={200} height={200} alt="Leaves Right" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute right-0 bottom-10 md:bottom-1/4 w-40 h-40 opacity-70 pointer-events-none select-none transform scale-x-[-1]" style={{zIndex:1}} />
+          <Image src="/Leaves.png" width={200} height={200} alt="Leaves Right" className="levitate hover:scale-105 transition-transform duration-300 hidden md:block absolute right-0 bottom-10 md:bottom-1/4 w-40 h-40 opacity-70 pointer-events-none select-none transform scale-x-[-1]" style={{zIndex:1}} />
           {/* Curve SVG Background */}
           {/* <Image src="/Curves.svg" fill alt="Curve Background" className="absolute left-0 top-0 w-full h-full object-cover pointer-events-none select-none" /> */}
         {/* Hero Content */}
